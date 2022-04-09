@@ -1,6 +1,8 @@
 # python code for CNN-LSTM network architecture
 # author: Tong Li,Ziye Wang
-# contact: Ziye Wang (Email: ziyewang@cug.edu.cn),
+# contact: Ziye Wang (Email: ziyewang@cug.edu.cn)
+# input positive and negative training data (.csv) is formatted in N-dimensional matrix, where N equals the number of features
+# more information can be found in the README
 
 from __future__ import print_function, division
 from keras.layers import *
@@ -30,12 +32,12 @@ for i in range(img.shape[0]):
     imgs.append(img[i, :])
     labels.append(0)
 imgs = np.asarray(imgs, np.float32)
-data = np.reshape(imgs, [-1, 7, 1])# dimension of input data
+data = np.reshape(imgs, [-1, 7, 1]) # dimension of input data
 label = np.asarray(labels, np.int32)
 
 base = 32
 
-label_all = read_csv('testing_labels.csv', header=None)#input testing labels:0 or 1
+label_all = read_csv('testing_labels.csv', header=None) #input testing labels:0 or 1
 label_all=label_all.values
 
 model = Sequential()
@@ -60,14 +62,14 @@ model.add(Dense(1, activation='sigmoid'))
 model.summary()
 
 
-Adam = Adam(lr=0.00001, beta_1=0.9, beta_2=0.999, epsilon=1e-08)#parameters: leraning rate
+Adam = Adam(lr=0.00001, beta_1=0.9, beta_2=0.999, epsilon=1e-08) #parameters: leraning rate
 model.compile(loss='binary_crossentropy', optimizer = optimizers.Adam(), metrics=['accuracy'])
-history=model.fit(data, label, batch_size=128, epochs=600, verbose=2, validation_split=0.2)#parameters: batch_size, epochs and the proportion of training and validation sets
+history=model.fit(data, label, batch_size=128, epochs=600, verbose=2, validation_split=0.2) #parameters: batch_size, epochs and the proportion of training and validation sets
 
 
 if os.path.exists('result.csv'):
-    os.remove('result.csv')#output the predict probability
-pre = read_csv('testing_data.csv', header=None)#input testing data
+    os.remove('result.csv') #output the predicted probability
+pre = read_csv('testing_data.csv', header=None) #input testing data
 pre = pre.values
 for i in range(pre.shape[0]):
     pres = np.asarray(pre[i, :], np.float32)
@@ -89,9 +91,9 @@ plt.legend()
 plt.show()
 
 loss=pd.DataFrame(loss)
-loss.to_csv('loss.csv',encoding='utf-8')#save the loss function of training data
+loss.to_csv('loss.csv',encoding='utf-8') #save the loss function of training data
 acc=pd.DataFrame(acc)
-acc.to_csv('acc.csv',encoding='utf-8')#save the accuracy of training data
+acc.to_csv('acc.csv',encoding='utf-8') #save the accuracy of training data
 
 plt.title('Validation accuracy and Loss')
 plt.plot(epochs, val_acc, 'red', label='Validation acc')
