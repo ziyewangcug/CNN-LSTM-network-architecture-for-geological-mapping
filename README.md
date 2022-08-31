@@ -48,6 +48,6 @@ Application of convolutional recurrent neural networks for geological feature ma
 
 Usage
 
--   set parameters: leraning rate, batch_size, and epochs
+-   set parameters: leraning rate, batch size, and epoch
 
--   run ‘CNN-LSTM.py’
+-   run: ‘CNN-LSTM.py’
