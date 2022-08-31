@@ -3,8 +3,8 @@
 Application of convolutional recurrent neural networks for geological feature mapping based on geochemical exploration data.
 
 -   This python code uses cross validation to tune the model and to find the optimal hyperparameters.
--   The input geochemical data include training and testing samples, where training samples are split into positive training data and negative training data, formatted as the example file.
--   The output result also formatted as a two-dimensional matrix including the locations of samples and the corresponding probability of target geological feature occurrence.
+-   The input geochemical data include training and testing samples, in which training samples are split into positive training data and negative training data, formatted as the example file.
+-   The output result is also formatted as a two-dimensional matrix including the locations of samples and the corresponding probability of target geological feature occurrence.
 
 **Environment**
 
@@ -18,7 +18,7 @@ Application of convolutional recurrent neural networks for geological feature ma
 
 -   positive training_data.csv
 
-positive training data
+    positive training data
 
 -   negative training_data.csv
 
@@ -49,4 +49,5 @@ positive training data
 Usage
 
 -   set parameters: leraning rate, batch_size, and epochs
+
 -   run ‘CNN-LSTM.py’
