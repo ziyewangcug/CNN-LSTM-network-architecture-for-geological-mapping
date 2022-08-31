@@ -33,7 +33,7 @@ for i in range(img.shape[0]):
     imgs.append(img[i, :])
     labels.append(0)
 imgs = np.asarray(imgs, np.float32)
-data = np.reshape(imgs, [-1, 7, 1]) # dimension of input data
+data = np.reshape(imgs, [-1, 7, 1]) #dimension of input data
 label = np.asarray(labels, np.int32)
 
 num_folds = 10 #number of k fold
@@ -41,7 +41,7 @@ kfold = KFold(n_splits=num_folds, shuffle=True)
 
 base = 32
 
-pre = read_csv('D:\博士小论文12\CNN-LSTM code/pre.csv', header=None) #input testing data
+pre = read_csv('testing_data.csv', header=None) #input testing data
 pre = pre.values
 label_all = read_csv('testing_labels.csv', header=None) #input testing labels:0 or 1
 label_all=label_all.values
@@ -50,7 +50,7 @@ k_num = 1
 for train, test in kfold.split(data, label):
     k_num = k_num+1
     model = Sequential()
-    model.add(Conv1D(base, 3, strides=1, padding='same', input_shape=(7, 1)))
+    model.add(Conv1D(base, 3, strides=1, padding='same', input_shape=(7, 1))) #dimension of input data
     model.add(BatchNormalization())
     model.add(Activation('relu'))
     model.add(Conv1D(base, 2, strides=1, padding='same'))
@@ -71,7 +71,7 @@ for train, test in kfold.split(data, label):
     model.summary()
 
     model.compile(loss='binary_crossentropy', optimizer=optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08), metrics=["accuracy"]) #parameters: leraning rate
-    history = model.fit(data, label, batch_size=128, epochs=600, verbose=2) #parameters: batch_size, epochs and the proportion of training and validation sets
+    history = model.fit(data, label, batch_size=128, epochs=600, verbose=2) #parameters: batch_size, epochs
     acc = history.history['accuracy']
     loss = history.history['loss']
     epochs = range(1, len(acc) + 1)
@@ -79,7 +79,7 @@ for train, test in kfold.split(data, label):
 
     for i in range(pre.shape[0]):
         pres = np.asarray(pre[i, :], np.float32)
-        predict = np.reshape(pres, [1, 7, 1])
+        predict = np.reshape(pres, [1, 7, 1]) #dimension of input data
         x = model.predict(predict, verbose=2)
         result[i]=result[i]+x
 
