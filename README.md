@@ -10,7 +10,7 @@ Application of convolutional recurrent neural networks for geological feature ma
 
 -   Python 3.7
 -   TensorFlow 2.1
--   Keras 1.21
+-   Keras 1.2.1
 -   Numpy 1.15.0
 -   Pandas 1.1
 
