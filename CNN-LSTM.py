@@ -46,6 +46,7 @@ pre = pre.values
 label_all = read_csv('testing_labels.csv', header=None) #input testing labels:0 or 1
 label_all=label_all.values
 
+result = np.zeros((pre.shape[0]))
 k_num = 1
 for train, test in kfold.split(data, label):
     k_num = k_num+1
